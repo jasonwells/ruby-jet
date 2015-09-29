@@ -1,5 +1,5 @@
 class Jet
   def self.test
-    puts 'Hello, gem test!'
+    return 'Hello, gem test!'
   end
 end
