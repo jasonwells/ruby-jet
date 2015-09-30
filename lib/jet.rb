@@ -1,5 +1,7 @@
 class Jet
-  def self.test
-    return 'Hello, gem test!'
+  def self.client(credentials = {})
+    Client.new(credentials)
   end
 end
+
+require 'jet/client'

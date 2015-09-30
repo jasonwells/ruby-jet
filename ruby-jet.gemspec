@@ -6,7 +6,10 @@ Gem::Specification.new do |gem|
   gem.description = 'Jet API service calls implemented in Ruby'
   gem.authors     = ['Jason Wells']
   gem.email       = 'flipstock@gmail.com'
-  gem.files       = ['lib/jet.rb']
+  gem.files       = ['lib/jet.rb', 'lib/jet/client.rb', 'lib/jet/client/orders.rb']
   gem.homepage    = 'https://github.com/jasonwells/ruby-jet'
   gem.license     = 'MIT'
+
+  gem.add_runtime_dependency 'rest-client', '~> 1.8'
+  gem.add_runtime_dependency 'json', '~> 1.8'
 end

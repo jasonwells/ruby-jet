@@ -1,10 +1,10 @@
 require 'jet'
 
-RSpec.describe Jet, "#test" do
-  context "default test" do
-    it "returns test string" do
-      test_string = Jet.test
-      expect(test_string).to eq 'Hello, gem test!'
+RSpec.describe Jet, '#client' do
+  context "asks for client" do
+    it "returns client" do
+      client = Jet.client
+      expect(client).to be_a Jet::Client
     end
   end
 end
