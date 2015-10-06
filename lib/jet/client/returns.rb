@@ -15,53 +15,33 @@ class Jet::Client::Returns
   end
 
   def get_returns(status = :created)
-    headers = @client.get_token
+    headers = @client.token
     query_status = STATUSES[status]
     response = RestClient.get("#{Jet::Client::API_URL}/returns/#{query_status}", headers)
-    if response.code == 200
-      JSON.parse(response.body)
-    else
-      nil
-    end
+    JSON.parse(response.body) if response.code == 200
   end
 
   def get_return(return_url)
-    headers = @client.get_token
+    headers = @client.token
     response = RestClient.get("#{Jet::Client::API_URL}#{return_url}", headers)
-    if response.code == 200
-      JSON.parse(response.body)
-    else
-      nil
-    end
+    JSON.parse(response.body) if response.code == 200
   end
 
   def get_return_by_id(return_id)
-    headers = @client.get_token
+    headers = @client.token
     response = RestClient.get("#{Jet::Client::API_URL}/returns/state/#{return_id}", headers)
-    if response.code == 200
-      JSON.parse(response.body)
-    else
-      nil
-    end
+    JSON.parse(response.body) if response.code == 200
   end
 
   def acknowledge_return(return_id, body = {})
-    headers = @client.get_token
+    headers = @client.token
     response = RestClient.put("#{Jet::Client::API_URL}/returns/#{return_id}/acknowledge", body.to_json, headers)
-    if response.code == 200
-      JSON.parse(response.body)
-    else
-      nil
-    end
+    JSON.parse(response.body) if response.code == 200
   end
 
   def complete_return(return_id, body = {})
-    headers = @client.get_token
+    headers = @client.token
     response = RestClient.put("#{Jet::Client::API_URL}/returns/#{return_id}/complete", body.to_json, headers)
-    if response.code == 200
-      JSON.parse(response.body)
-    else
-      nil
-    end
+    JSON.parse(response.body) if response.code == 200
   end
 end

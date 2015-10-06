@@ -2,7 +2,6 @@ require 'rest-client'
 require 'json'
 
 class Jet::Client
-
   API_URL = 'https://merchant-api.jet.com/api'
 
   def initialize(config = {})
@@ -11,7 +10,7 @@ class Jet::Client
     @merchant_id = config[:merchant_id]
   end
 
-  def get_token
+  def token
     if not (@id_token and @token_type and @expires_on > Time.now)
       body = {
         user: @api_user,
@@ -24,7 +23,7 @@ class Jet::Client
       @expires_on = Time.parse(parsed_response['expires_on'])
     end
 
-    {Authorization: "#{@token_type} #{@id_token}"}
+    { Authorization: "#{@token_type} #{@id_token}" }
   end
 
   def orders

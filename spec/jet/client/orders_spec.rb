@@ -1,13 +1,13 @@
 require 'jet'
 
-RSpec.describe Jet::Client::Orders, "#get_orders" do
-  context "get ready orders" do
-    it "returns empty orders hash" do
+RSpec.describe Jet::Client::Orders, '#get_orders' do
+  context 'get ready orders' do
+    it 'returns empty orders hash' do
       client = Jet.client
 
       response = double
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:get).with("#{Jet::Client::API_URL}/orders/ready", fake_header) { response }
       allow(response).to receive(:code) { 200 }
       allow(response).to receive(:body) { '{"order_urls": []}' }
@@ -17,12 +17,12 @@ RSpec.describe Jet::Client::Orders, "#get_orders" do
     end
   end
 
-  context "get bad status orders" do
-    it "returns 404 error" do
+  context 'get bad status orders' do
+    it 'returns 404 error' do
       client = Jet.client
 
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:get)
         .with("#{Jet::Client::API_URL}/orders/", fake_header)
         .and_raise(RestClient::ResourceNotFound)
@@ -32,14 +32,14 @@ RSpec.describe Jet::Client::Orders, "#get_orders" do
   end
 end
 
-RSpec.describe Jet::Client::Orders, "#get_order" do
-  context "get order by url" do
-    it "returns order" do
+RSpec.describe Jet::Client::Orders, '#get_order' do
+  context 'get order by url' do
+    it 'returns order' do
       client = Jet.client
 
       response = double
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:get)
         .with("#{Jet::Client::API_URL}/orders/withoutShipmentDetail/fakeid", fake_header) { response }
       allow(response).to receive(:code) { 200 }
@@ -50,12 +50,12 @@ RSpec.describe Jet::Client::Orders, "#get_order" do
     end
   end
 
-  context "get order not present" do
-    it "returns 404 error" do
+  context 'get order not present' do
+    it 'returns 404 error' do
       client = Jet.client
 
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:get)
         .with("#{Jet::Client::API_URL}/orders/withoutShipmentDetail/badid", fake_header)
         .and_raise(RestClient::ResourceNotFound)
@@ -65,14 +65,14 @@ RSpec.describe Jet::Client::Orders, "#get_order" do
   end
 end
 
-RSpec.describe Jet::Client::Orders, "#get_order_by_id" do
-  context "get order by id" do
-    it "returns order" do
+RSpec.describe Jet::Client::Orders, '#get_order_by_id' do
+  context 'get order by id' do
+    it 'returns order' do
       client = Jet.client
 
       response = double
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:get)
         .with("#{Jet::Client::API_URL}/orders/withoutShipmentDetail/fakeid", fake_header) { response }
       allow(response).to receive(:code) { 200 }
@@ -83,12 +83,12 @@ RSpec.describe Jet::Client::Orders, "#get_order_by_id" do
     end
   end
 
-  context "get order not present" do
-    it "returns 404 error" do
+  context 'get order not present' do
+    it 'returns 404 error' do
       client = Jet.client
 
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:get)
         .with("#{Jet::Client::API_URL}/orders/withoutShipmentDetail/badid", fake_header)
         .and_raise(RestClient::ResourceNotFound)
@@ -98,14 +98,14 @@ RSpec.describe Jet::Client::Orders, "#get_order_by_id" do
   end
 end
 
-RSpec.describe Jet::Client::Orders, "#acknowledge_order" do
-  context "acknowledges order" do
-    it "returns success" do
+RSpec.describe Jet::Client::Orders, '#acknowledge_order' do
+  context 'acknowledges order' do
+    it 'returns success' do
       client = Jet.client
 
       response = double
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:put)
         .with("#{Jet::Client::API_URL}/orders/fakeid/acknowledge", '{}', fake_header) { response }
       allow(response).to receive(:code) { 201 }
@@ -117,12 +117,12 @@ RSpec.describe Jet::Client::Orders, "#acknowledge_order" do
     end
   end
 
-  context "acknowledges order not present" do
-    it "returns 404 error" do
+  context 'acknowledges order not present' do
+    it 'returns 404 error' do
       client = Jet.client
 
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:put)
         .with("#{Jet::Client::API_URL}/orders/badid/acknowledge", '{}', fake_header)
         .and_raise(RestClient::ResourceNotFound)
@@ -132,14 +132,14 @@ RSpec.describe Jet::Client::Orders, "#acknowledge_order" do
   end
 end
 
-RSpec.describe Jet::Client::Orders, "#ship_order" do
-  context "sends order shipped notification" do
-    it "returns success" do
+RSpec.describe Jet::Client::Orders, '#ship_order' do
+  context 'sends order shipped notification' do
+    it 'returns success' do
       client = Jet.client
 
       response = double
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:put)
         .with("#{Jet::Client::API_URL}/orders/fakeid/shipped", '{}', fake_header) { response }
       allow(response).to receive(:code) { 201 }
@@ -151,12 +151,12 @@ RSpec.describe Jet::Client::Orders, "#ship_order" do
     end
   end
 
-  context "sends order shipped notification not present" do
-    it "returns 404 error" do
+  context 'sends order shipped notification not present' do
+    it 'returns 404 error' do
       client = Jet.client
 
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:put)
         .with("#{Jet::Client::API_URL}/orders/badid/shipped", '{}', fake_header)
         .and_raise(RestClient::ResourceNotFound)
@@ -166,14 +166,14 @@ RSpec.describe Jet::Client::Orders, "#ship_order" do
   end
 end
 
-RSpec.describe Jet::Client::Orders, "#get_directed_cancel" do
-  context "get directed cancel" do
-    it "returns empty orders hash" do
+RSpec.describe Jet::Client::Orders, '#get_directed_cancel' do
+  context 'get directed cancel' do
+    it 'returns empty orders hash' do
       client = Jet.client
 
       response = double
-      fake_header = {Authorization: 'Bearer notarealtoken'}
-      allow(client).to receive(:get_token) { fake_header }
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:get).with("#{Jet::Client::API_URL}/orders/directedCancel", fake_header) { response }
       allow(response).to receive(:code) { 200 }
       allow(response).to receive(:body) { '{"order_urls": []}' }
