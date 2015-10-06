@@ -4,9 +4,9 @@ require 'json'
 class Jet::Client::Returns
 
   STATUSES = {
-    jet_refunded: 'Jet refunded',
     created: 'created',
-    inprogress: 'inprogress',
+    acknowledged: 'acknowledged',
+    refund_customer_without_return: 'refund customer without return',
     completed_by_merchant: 'completed by merchant',
   }
 
