@@ -6,8 +6,8 @@ class Jet::Client::Returns
   STATUSES = {
     created: 'created',
     acknowledged: 'acknowledged',
-    refund_customer_without_return: 'refund customer without return',
-    completed_by_merchant: 'completed by merchant',
+    refund_customer_without_return: 'refund%20customer%20without%20return',
+    completed_by_merchant: 'completed%20by%20merchant',
   }
 
   def initialize(client)
