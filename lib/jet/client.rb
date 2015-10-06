@@ -30,6 +30,11 @@ class Jet::Client
   def orders
     Orders.new(self)
   end
+
+  def returns
+    Returns.new(self)
+  end
 end
 
 require 'jet/client/orders'
+require 'jet/client/returns'

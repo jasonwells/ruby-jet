@@ -66,7 +66,7 @@ RSpec.describe Jet::Client::Orders, "#get_order" do
 end
 
 RSpec.describe Jet::Client::Orders, "#get_order_by_id" do
-  context "get order by url" do
+  context "get order by id" do
     it "returns order" do
       client = Jet.client
 
