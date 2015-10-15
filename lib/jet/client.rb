@@ -37,6 +37,10 @@ class Jet::Client
   def products
     Products.new(self)
   end
+
+  def taxonomy
+    Taxonomy.new(self)
+  end
 end
 
 require 'jet/client/orders'
