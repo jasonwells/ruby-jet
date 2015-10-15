@@ -8,8 +8,8 @@ class Jet::Client::Taxonomy
 
   def get_links(limit, offset, version = "v1")
     headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}/taxonomy/links/#{version}",
-      { params: { limit: limit, offset: offset }}, headers)
+    params = { limit: limit, offset: offset }
+    response = RestClient.get("#{Jet::Client::API_URL}/taxonomy/links/#{version}", headers.merge({ params: params }))
     JSON.parse(response.body) if response.code == 200
   end
 
