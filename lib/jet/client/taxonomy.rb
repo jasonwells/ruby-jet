@@ -13,15 +13,15 @@ class Jet::Client::Taxonomy
     JSON.parse(response.body) if response.code == 200
   end
 
-  def get_node(node_id)
+  def get_node(node_url)
     headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}/taxonomy/nodes/#{node_id}", headers)
+    response = RestClient.get("#{Jet::Client::API_URL}#{node_url}", headers)
     JSON.parse(response.body) if response.code == 200
   end
 
-  def get_node_attributes(node_id)
+  def get_node_attributes(node_url)
     headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}/taxonomy/nodes/#{node_id}/attributes", headers)
+    response = RestClient.get("#{Jet::Client::API_URL}#{node_url}/attributes", headers)
     JSON.parse(response.body) if response.code == 200
   end
 end

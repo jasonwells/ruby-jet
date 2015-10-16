@@ -45,12 +45,12 @@ RSpec.describe Jet::Client::Taxonomy, '#get_node' do
       allow(response).to receive(:code) { 200 }
       allow(response).to receive(:body) { '{"jet_node_id": "fakenodeid" }' }
 
-      node = client.taxonomy.get_node('fakenodeid')
+      node = client.taxonomy.get_node('/taxonomy/nodes/fakenodeid')
       expect(node['jet_node_id']).to eq 'fakenodeid'
     end
   end
 
-  context 'get node for non-existent node_id' do
+  context 'get node for non-existent node_url' do
     it 'returns 404 error' do
       client = Jet.client
 
@@ -60,7 +60,7 @@ RSpec.describe Jet::Client::Taxonomy, '#get_node' do
         .with("#{Jet::Client::API_URL}/taxonomy/nodes/badnodeid", fake_header)
         .and_raise(RestClient::ResourceNotFound)
 
-      expect { client.taxonomy.get_node('badnodeid') }
+      expect { client.taxonomy.get_node('/taxonomy/nodes/badnodeid') }
         .to raise_error RestClient::ResourceNotFound
     end
   end
@@ -79,12 +79,12 @@ RSpec.describe Jet::Client::Taxonomy, '#get_node_attributes' do
       allow(response).to receive(:code) { 200 }
       allow(response).to receive(:body) { '{"attributes": [] }' }
 
-      attributes = client.taxonomy.get_node_attributes('fakenodeid')
+      attributes = client.taxonomy.get_node_attributes('/taxonomy/nodes/fakenodeid')
       expect(attributes['attributes'].length).to eq 0
     end
   end
 
-  context 'get node attributes for non-existent node_id' do
+  context 'get node attributes for non-existent node_url' do
     it 'returns 404 error' do
       client = Jet.client
 
@@ -94,7 +94,7 @@ RSpec.describe Jet::Client::Taxonomy, '#get_node_attributes' do
         .with("#{Jet::Client::API_URL}/taxonomy/nodes/badnodeid/attributes", fake_header)
         .and_raise(RestClient::ResourceNotFound)
 
-      expect { client.taxonomy.get_node_attributes('badnodeid') }
+      expect { client.taxonomy.get_node_attributes('/taxonomy/nodes/badnodeid') }
         .to raise_error RestClient::ResourceNotFound
     end
   end
