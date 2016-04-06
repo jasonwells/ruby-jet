@@ -41,9 +41,14 @@ class Jet::Client
   def taxonomy
     Taxonomy.new(self)
   end
+
+  def files
+    Files.new(self)
+  end
 end
 
 require 'jet/client/orders'
 require 'jet/client/returns'
 require 'jet/client/products'
 require 'jet/client/taxonomy'
+require 'jet/client/files'
