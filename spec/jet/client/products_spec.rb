@@ -247,7 +247,7 @@ RSpec.describe Jet::Client::Orders, '#get_products' do
       fake_header = { Authorization: 'Bearer notarealtoken' }
       allow(client).to receive(:token) { fake_header }
       allow(RestClient).to receive(:get)
-        .with("#{Jet::Client::API_URL}/merchant-skus", fake_header.merge(params: {})) { response }
+        .with("#{Jet::Client::API_URL}/merchant-skus", fake_header) { response }
       allow(response).to receive(:code) { 200 }
       allow(response).to receive(:body) { '{"sku_urls": []}' }
 

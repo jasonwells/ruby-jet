@@ -9,9 +9,7 @@ class Jet::Client::Files
   end
 
   def upload_token
-    headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}/files/uploadToken", headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_get_with_token('/files/uploadToken')
   end
 
   def file_upload(url, body)
@@ -33,8 +31,6 @@ class Jet::Client::Files
   end
 
   def jet_file_id(file_id)
-    headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}/files/#{file_id}", headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_get_with_token("/files/#{file_id}")
   end
 end

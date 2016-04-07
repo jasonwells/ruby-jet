@@ -7,21 +7,15 @@ class Jet::Client::Taxonomy
   end
 
   def get_links(limit, offset, version = "v1")
-    headers = @client.token
     params = { limit: limit, offset: offset }
-    response = RestClient.get("#{Jet::Client::API_URL}/taxonomy/links/#{version}", headers.merge({ params: params }))
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_get_with_token("/taxonomy/links/#{version}", params)
   end
 
   def get_node(node_url)
-    headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}#{node_url}", headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_get_with_token(node_url)
   end
 
   def get_node_attributes(node_url)
-    headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}#{node_url}/attributes", headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_get_with_token("#{node_url}/attributes")
   end
 end

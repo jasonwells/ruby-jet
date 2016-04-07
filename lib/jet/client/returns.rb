@@ -15,22 +15,16 @@ class Jet::Client::Returns
   end
 
   def get_returns(status = :created)
-    headers = @client.token
     query_status = STATUSES[status]
-    response = RestClient.get("#{Jet::Client::API_URL}/returns/#{query_status}", headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_get_with_token("/returns/#{query_status}")
   end
 
   def get_return(return_url)
-    headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}#{return_url}", headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_get_with_token(return_url)
   end
 
   def get_return_by_id(return_id)
-    headers = @client.token
-    response = RestClient.get("#{Jet::Client::API_URL}/returns/state/#{return_id}", headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_get_with_token("/returns/state/#{return_id}")
   end
 
   def acknowledge_return(return_id, body = {})

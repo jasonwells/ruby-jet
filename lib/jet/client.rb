@@ -26,6 +26,13 @@ class Jet::Client
     { Authorization: "#{@token_type} #{@id_token}" }
   end
 
+  def rest_get_with_token(path, query_params = {})
+    headers = token
+    headers.merge!({ params: query_params }) unless query_params.empty?
+    response = RestClient.get("#{API_URL}#{path}", headers)
+    JSON.parse(response.body) if response.code == 200
+  end
+
   def orders
     Orders.new(self)
   end
