@@ -7,9 +7,7 @@ class Jet::Client::Products
   end
 
   def update_inventory(merchant_sku, body = {})
-    headers = @client.token
-    response = RestClient.put("#{Jet::Client::API_URL}/merchant-skus/#{merchant_sku}/inventory", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_put_with_token("/merchant-skus/#{merchant_sku}/inventory", body)
   end
 
   def get_inventory(merchant_sku)
@@ -17,9 +15,7 @@ class Jet::Client::Products
   end
 
   def update_product(merchant_sku, body = {})
-    headers = @client.token
-    response = RestClient.put("#{Jet::Client::API_URL}/merchant-skus/#{merchant_sku}", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_put_with_token("/merchant-skus/#{merchant_sku}", body)
   end
 
   def get_product(merchant_sku)
@@ -27,9 +23,7 @@ class Jet::Client::Products
   end
 
   def update_price(merchant_sku, body = {})
-    headers = @client.token
-    response = RestClient.put("#{Jet::Client::API_URL}/merchant-skus/#{merchant_sku}/price", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_put_with_token("/merchant-skus/#{merchant_sku}/price", body)
   end
 
   def get_price(merchant_sku)
@@ -37,9 +31,7 @@ class Jet::Client::Products
   end
 
   def update_image(merchant_sku, body = {})
-    headers = @client.token
-    response = RestClient.put("#{Jet::Client::API_URL}/merchant-skus/#{merchant_sku}/image", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_put_with_token("/merchant-skus/#{merchant_sku}/image", body)
   end
 
   def get_products(params = {})

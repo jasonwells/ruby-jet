@@ -29,15 +29,11 @@ class Jet::Client::Orders
   end
 
   def acknowledge_order(order_id, body = {})
-    headers = @client.token
-    response = RestClient.put("#{Jet::Client::API_URL}/orders/#{order_id}/acknowledge", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_put_with_token("/orders/#{order_id}/acknowledge", body)
   end
 
   def ship_order(order_id, body = {})
-    headers = @client.token
-    response = RestClient.put("#{Jet::Client::API_URL}/orders/#{order_id}/shipped", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_put_with_token("/orders/#{order_id}/shipped", body)
   end
 
   def get_directed_cancel

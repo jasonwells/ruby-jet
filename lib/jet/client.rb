@@ -33,6 +33,12 @@ class Jet::Client
     JSON.parse(response.body) if response.code == 200
   end
 
+  def rest_put_with_token(path, body = {})
+    headers = token
+    response = RestClient.put("#{API_URL}#{path}", body.to_json, headers)
+    JSON.parse(response.body) if response.code == 200
+  end
+
   def orders
     Orders.new(self)
   end

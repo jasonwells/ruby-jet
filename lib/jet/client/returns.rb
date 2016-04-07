@@ -28,14 +28,10 @@ class Jet::Client::Returns
   end
 
   def acknowledge_return(return_id, body = {})
-    headers = @client.token
-    response = RestClient.put("#{Jet::Client::API_URL}/returns/#{return_id}/acknowledge", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_put_with_token("/returns/#{return_id}/acknowledge", body)
   end
 
   def complete_return(return_id, body = {})
-    headers = @client.token
-    response = RestClient.put("#{Jet::Client::API_URL}/returns/#{return_id}/complete", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.rest_put_with_token("/returns/#{return_id}/complete", body)
   end
 end
