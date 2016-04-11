@@ -4,3 +4,7 @@ rvm:
   - 2.1
   - 2.2
   - ruby-head
+addons:
+  apt:
+    packages:
+      - libgmp-dev
