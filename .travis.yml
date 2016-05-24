@@ -8,4 +8,4 @@ addons:
   apt:
     packages:
       - libgmp-dev
-      - build-essential
+      - gcc
