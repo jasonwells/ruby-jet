@@ -1,5 +1,5 @@
 require 'rest-client'
-require 'json'
+require 'oj'
 
 class Jet::Client
   API_URL = 'https://merchant-api.jet.com/api'
@@ -10,14 +10,22 @@ class Jet::Client
     @merchant_id = config[:merchant_id]
   end
 
+  def encode_json(data)
+    Oj.dump(data, mode: :compat)
+  end
+
+  def decode_json(json)
+    Oj.load(json)
+  end
+
   def token
     if not (@id_token and @token_type and @expires_on > Time.now)
       body = {
         user: @api_user,
         pass: @secret
       }
-      response = RestClient.post("#{API_URL}/token", body.to_json)
-      parsed_response = JSON.parse(response.body)
+      response = RestClient.post("#{API_URL}/token", encode_json(body))
+      parsed_response = decode_json(response.body)
       @id_token = parsed_response['id_token']
       @token_type = parsed_response['token_type']
       @expires_on = Time.parse(parsed_response['expires_on'])
@@ -30,13 +38,13 @@ class Jet::Client
     headers = token
     headers.merge!({ params: query_params }) unless query_params.empty?
     response = RestClient.get("#{API_URL}#{path}", headers)
-    JSON.parse(response.body) if response.code == 200
+    decode_json(response.body) if response.code == 200
   end
 
   def rest_put_with_token(path, body = {})
     headers = token
     response = RestClient.put("#{API_URL}#{path}", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    decode_json(response.body) if response.code == 200
   end
 
   def orders

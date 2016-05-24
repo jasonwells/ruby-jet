@@ -1,5 +1,5 @@
 require 'rest-client'
-require 'json'
+require 'oj'
 require 'zlib'
 require 'stringio'
 
@@ -20,14 +20,14 @@ class Jet::Client::Files
     gz.close
     gzipped_body = io.string
     response = RestClient.put(url, gzipped_body, headers)
-    JSON.parse(response.body) if response.code == 200
+    @client.decode_json(response.body) if response.code == 200
   end
 
   def uploaded_files(url, file_type, file_name)
     headers = @client.token
     body = { url: url, file_type: file_type, file_name: file_name }
-    response = RestClient.post("#{Jet::Client::API_URL}/files/uploaded", body.to_json, headers)
-    JSON.parse(response.body) if response.code == 200
+    response = RestClient.post("#{Jet::Client::API_URL}/files/uploaded", @client.encode_json(body), headers)
+    @client.decode_json(response.body) if response.code == 200
   end
 
   def jet_file_id(file_id)

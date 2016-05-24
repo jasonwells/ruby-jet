@@ -1,5 +1,4 @@
 require 'rest-client'
-require 'json'
 
 class Jet::Client::Taxonomy
   def initialize(client)

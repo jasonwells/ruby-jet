@@ -98,40 +98,6 @@ RSpec.describe Jet::Client::Returns, '#get_return_by_id' do
   end
 end
 
-RSpec.describe Jet::Client::Returns, '#acknowledge_return' do
-  context 'acknowledges return' do
-    it 'returns success' do
-      client = Jet.client
-
-      response = double
-      fake_header = { Authorization: 'Bearer notarealtoken' }
-      allow(client).to receive(:token) { fake_header }
-      allow(RestClient).to receive(:put)
-        .with("#{Jet::Client::API_URL}/returns/fakeid/acknowledge", '{}', fake_header) { response }
-      allow(response).to receive(:code) { 201 }
-      allow(response).to receive(:body) { nil }
-
-      ack = client.returns.acknowledge_return('fakeid')
-      expect(response.code).to eq 201
-      expect(ack).to be_nil
-    end
-  end
-
-  context 'acknowledges return not present' do
-    it 'returns 404 error' do
-      client = Jet.client
-
-      fake_header = { Authorization: 'Bearer notarealtoken' }
-      allow(client).to receive(:token) { fake_header }
-      allow(RestClient).to receive(:put)
-        .with("#{Jet::Client::API_URL}/returns/badid/acknowledge", '{}', fake_header)
-        .and_raise(RestClient::ResourceNotFound)
-
-      expect { client.returns.acknowledge_return('badid') }.to raise_error RestClient::ResourceNotFound
-    end
-  end
-end
-
 RSpec.describe Jet::Client::Returns, '#complete_return' do
   context 'sends order shipped notification' do
     it 'returns success' do

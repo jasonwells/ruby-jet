@@ -1,5 +1,4 @@
 require 'rest-client'
-require 'json'
 
 class Jet::Client::Products
   def initialize(client)
@@ -38,4 +37,3 @@ class Jet::Client::Products
     @client.rest_get_with_token('/merchant-skus', params)
   end
 end
-

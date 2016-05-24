@@ -1,5 +1,4 @@
 require 'rest-client'
-require 'json'
 
 class Jet::Client::Returns
 
@@ -25,10 +24,6 @@ class Jet::Client::Returns
 
   def get_return_by_id(return_id)
     @client.rest_get_with_token("/returns/state/#{return_id}")
-  end
-
-  def acknowledge_return(return_id, body = {})
-    @client.rest_put_with_token("/returns/#{return_id}/acknowledge", body)
   end
 
   def complete_return(return_id, body = {})
