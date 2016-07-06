@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name        = 'ruby-jet'
-  gem.version     = '0.6.0'
+  gem.version     = '0.7.0'
   gem.date        = '2016-05-23'
   gem.summary     = 'Jet API for Ruby'
   gem.description = 'Jet API service calls implemented in Ruby'

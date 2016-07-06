@@ -47,6 +47,12 @@ class Jet::Client
     decode_json(response.body) if response.code == 200
   end
 
+  def rest_post_with_token(path, body = {})
+    headers = token
+    response = RestClient.post("#{API_URL}#{path}", body.to_json, headers)
+    decode_json(response.body) if response.code == 201
+  end
+
   def orders
     Orders.new(self)
   end
@@ -66,6 +72,10 @@ class Jet::Client
   def files
     Files.new(self)
   end
+
+  def refunds
+    Refunds.new(self)
+  end
 end
 
 require 'jet/client/orders'
@@ -73,3 +83,4 @@ require 'jet/client/returns'
 require 'jet/client/products'
 require 'jet/client/taxonomy'
 require 'jet/client/files'
+require 'jet/client/refunds'
