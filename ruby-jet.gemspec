@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name        = 'ruby-jet'
-  gem.version     = '0.9.0'
+  gem.version     = '0.9.1'
   gem.date        = '2017-06-02'
   gem.summary     = 'Jet API for Ruby'
   gem.description = 'Jet API service calls implemented in Ruby'
@@ -11,5 +11,5 @@ Gem::Specification.new do |gem|
   gem.license     = 'MIT'
 
   gem.add_runtime_dependency 'rest-client', '~> 2.0'
-  gem.add_runtime_dependency 'oj', '~> 3.0'
+  gem.add_runtime_dependency 'oj', '~> 2.18'
 end
