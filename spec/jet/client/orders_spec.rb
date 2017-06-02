@@ -165,21 +165,3 @@ RSpec.describe Jet::Client::Orders, '#ship_order' do
     end
   end
 end
-
-RSpec.describe Jet::Client::Orders, '#get_directed_cancel' do
-  context 'get directed cancel' do
-    it 'returns empty orders hash' do
-      client = Jet.client
-
-      response = double
-      fake_header = { Authorization: 'Bearer notarealtoken' }
-      allow(client).to receive(:token) { fake_header }
-      allow(RestClient).to receive(:get).with("#{Jet::Client::API_URL}/orders/directedCancel", fake_header) { response }
-      allow(response).to receive(:code) { 200 }
-      allow(response).to receive(:body) { '{"order_urls": []}' }
-
-      orders = client.orders.get_directed_cancel
-      expect(orders['order_urls'].length).to eq 0
-    end
-  end
-end

@@ -1,4 +1,5 @@
-class Jet
+# Jet API module
+module Jet
   def self.client(credentials = {})
     Client.new(credentials)
   end

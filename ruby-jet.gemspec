@@ -11,5 +11,5 @@ Gem::Specification.new do |gem|
   gem.license     = 'MIT'
 
   gem.add_runtime_dependency 'rest-client', '~> 2.0'
-  gem.add_runtime_dependency 'oj', '~> 2.15'
+  gem.add_runtime_dependency 'oj', '~> 3.0'
 end

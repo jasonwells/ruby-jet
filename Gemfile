@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
 group :test do
-  gem 'rake', '~> 10.4'
-  gem 'rspec', '~> 3.3'
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'rake', '~> 12.0'
+  gem 'rspec', '~> 3.6'
 end
 
 gemspec
