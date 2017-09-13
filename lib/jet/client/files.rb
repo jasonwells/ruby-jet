@@ -21,7 +21,7 @@ module Jet
         gz.close
         gzipped_body = io.string
         response = RestClient.put(url, gzipped_body, headers)
-        { status: :success } if response.code == 201
+        { status: :success, http_status: :created } if response.code == 201
       end
 
       def uploaded_files(url, file_type, file_name)

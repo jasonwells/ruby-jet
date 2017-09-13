@@ -49,6 +49,7 @@ RSpec.describe Jet::Client::Files, '#file_upload' do
 
       upload_response = client.files.file_upload(fake_url, fake_body)
       expect(upload_response[:status]).to eq :success
+      expect(upload_response[:http_status]).to eq :created
     end
   end
 
