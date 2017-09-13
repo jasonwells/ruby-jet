@@ -44,11 +44,11 @@ RSpec.describe Jet::Client::Files, '#file_upload' do
       fake_url = 'https://jetupload.blob.core.windows.net/merchant-files/dca10a71128940bf80aca9edee52e7cd?sv=2014-02-14&sr=b&sig=PCIQGWiwzHmdBeEQbFTnOeyAdGowKcQYbTg9OPIvEQo%3D&se=2014-10-15T22%3A23%3A28Z&sp=w'
       fake_body = '{"fake":"json"}'
       allow(RestClient).to receive(:put).with(fake_url, anything, fake_header) { response }
-      allow(response).to receive(:code) { 200 }
+      allow(response).to receive(:code) { 201 }
       allow(response).to receive(:body) { '{}' }
 
       upload_response = client.files.file_upload(fake_url, fake_body)
-      expect(upload_response).to be_empty
+      expect(upload_response[:status]).to eq :success
     end
   end
 
