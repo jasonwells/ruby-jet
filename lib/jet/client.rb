@@ -12,7 +12,7 @@ module Jet
       @merchant_id = config[:merchant_id]
       @id_token = raw_token[:id_token]
       @token_type = raw_token[:token_type]
-      @expires_on = raw_token[:expires_on]
+      @expires_on = Time.parse(raw_token[:expires_on].to_s) if raw_token[:expires_on]
     end
 
     def encode_json(data)
@@ -45,7 +45,7 @@ module Jet
         {
           id_token: @id_token,
           token_type: @token_type,
-          expires_on: @expires_on
+          expires_on: @expires_on.iso8601
         }
       else
         {}
