@@ -136,6 +136,26 @@ RSpec.describe Jet::Client::Orders, '#get_product' do
   end
 end
 
+RSpec.describe Jet::Client::Orders, '#update_sku_archive' do
+  context 'archive sku that exists' do 
+    it 'returns a 204 on success' do
+      client = Jet.client
+
+      response = double
+      fake_header = { Authorization: 'Bearer notarealtoken' }
+      allow(client).to receive(:token) { fake_header }
+      allow(RestClient).to receive(:put)
+        .with("#{Jet::Client::API_URL}/merchant-skus/fakesku/status/archive", '{}', fake_header) { response }
+      allow(response).to receive(:code) { 204 }
+      allow(response).to receive(:body) { nil }
+
+      archive = client.products.update_sku_archive('fakesku', {})
+      expect(archive).to be_nil
+    end
+  end
+end
+
+
 RSpec.describe Jet::Client::Orders, '#update_price' do
   context 'update product price' do
     it 'returns 204 on success' do
@@ -256,3 +276,5 @@ RSpec.describe Jet::Client::Orders, '#get_products' do
     end
   end
 end
+
+

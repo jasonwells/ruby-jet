@@ -26,6 +26,10 @@ module Jet
         @client.rest_put_with_token("/merchant-skus/#{merchant_sku}/price", body)
       end
 
+      def update_sku_archive(merchant_sku, body = {})
+        @client.rest_put_with_token("/merchant-skus/#{merchant_sku}/status/archive", body)
+      end
+
       def get_price(merchant_sku)
         @client.rest_get_with_token("/merchant-skus/#{merchant_sku}/price")
       end
