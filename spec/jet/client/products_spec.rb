@@ -136,8 +136,8 @@ RSpec.describe Jet::Client::Orders, '#get_product' do
   end
 end
 
-RSpec.describe Jet::Client::Orders, '#update_sku_archive' do
-  context 'archive sku that exists' do 
+RSpec.describe Jet::Client::Orders, '#archive_sku' do
+  context 'archive sku that exists' do
     it 'returns a 204 on success' do
       client = Jet.client
 
@@ -149,12 +149,11 @@ RSpec.describe Jet::Client::Orders, '#update_sku_archive' do
       allow(response).to receive(:code) { 204 }
       allow(response).to receive(:body) { nil }
 
-      archive = client.products.update_sku_archive('fakesku', {})
+      archive = client.products.archive_sku('fakesku', {})
       expect(archive).to be_nil
     end
   end
 end
-
 
 RSpec.describe Jet::Client::Orders, '#update_price' do
   context 'update product price' do
@@ -276,5 +275,3 @@ RSpec.describe Jet::Client::Orders, '#get_products' do
     end
   end
 end
-
-
