@@ -7,7 +7,7 @@ module Jet
       end
 
       def update_inventory(merchant_sku, body = {})
-        @client.rest_put_with_token("/merchant-skus/#{merchant_sku}/inventory", body)
+        @client.rest_patch_with_token("/merchant-skus/#{merchant_sku}/inventory", body)
       end
 
       def get_inventory(merchant_sku)

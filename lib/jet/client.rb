@@ -75,6 +75,12 @@ module Jet
       decode_json(response.body) if response.code == 201
     end
 
+    def rest_patch_with_token(path, body = {})
+      headers = token
+      response = RestClient.patch("#{API_URL}#{path}", encode_json(body), headers)
+      decode_json(response.body) if response.code == 200
+    end
+
     def orders
       Orders.new(self)
     end

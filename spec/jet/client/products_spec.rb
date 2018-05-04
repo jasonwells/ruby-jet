@@ -8,7 +8,7 @@ RSpec.describe Jet::Client::Orders, '#update_inventory' do
       response = double
       fake_header = { Authorization: 'Bearer notarealtoken' }
       allow(client).to receive(:token) { fake_header }
-      allow(RestClient).to receive(:put)
+      allow(RestClient).to receive(:patch)
         .with("#{Jet::Client::API_URL}/merchant-skus/fakesku/inventory", '{}', fake_header) { response }
       allow(response).to receive(:code) { 204 }
       allow(response).to receive(:body) { nil }
@@ -24,7 +24,7 @@ RSpec.describe Jet::Client::Orders, '#update_inventory' do
 
       fake_header = { Authorization: 'Bearer notarealtoken' }
       allow(client).to receive(:token) { fake_header }
-      allow(RestClient).to receive(:put)
+      allow(RestClient).to receive(:patch)
         .with("#{Jet::Client::API_URL}/merchant-skus/badsku/inventory", '{}', fake_header)
         .and_raise(RestClient::ResourceNotFound)
 
